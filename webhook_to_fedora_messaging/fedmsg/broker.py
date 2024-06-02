@@ -1,7 +1,7 @@
 from fedora_messaging import api, config, message
 import os
 import toml
-from util.config import TEMPLATE, CONF_PATH
+from webhook_to_fedora_messaging.config import TEMPLATE, CONF_PATH
 
 
 
@@ -56,14 +56,5 @@ class FedMsgBroker:
         api.consume(lambda message: print(message))
         
         
-# TODO : publish    
-        
-if __name__ == "__main__":
-    key_file = "/etc/fedora-messaging/fedora-key.pem"
-    cert_file = "/etc/fedora-messaging/fedora-cert.pem"
-    ca_cert = "/etc/fedora-messaging/cacert.pem"
-    
-    broker = FedMsgBroker("", key_file, cert_file, ca_cert)
-    broker.set_config({"amqp_url": "localhost"}) # Another way to set specific configurations
-    broker.consume()
+
     
