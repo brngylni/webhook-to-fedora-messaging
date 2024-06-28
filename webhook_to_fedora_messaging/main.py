@@ -15,7 +15,7 @@ from .config import get_config
 from .config.defaults import LOGGER_CONFIG
 
 from logging.config import dictConfig
-
+from .endpoints.user import user_endpoint
 from webhook_to_fedora_messaging.exceptions import ConfigError
 
 import logging
@@ -26,7 +26,7 @@ def create_app():
     main = Flask(
 	    "webhook_to_fedora_messaging"
     )
-
+    
     # First attempt loading the defaults from the Defaults object
     main.config.from_object(
         "webhook_to_fedora_messaging.config.defaults.Defaults"
@@ -43,5 +43,6 @@ def create_app():
         confdata
     )
     dictConfig(confdata["logsconf"])
-
+    main.register_blueprint(user_endpoint)
+    
     return main
